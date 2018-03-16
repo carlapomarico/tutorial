@@ -13,7 +13,6 @@
         <testng.version>6.13.1</testng.version>
         <lang3.version>3.7</lang3.version>
         <maven.surefire.failsafe.version>2.19.1</maven.surefire.failsafe.version>
-        <maven.surefire.version>2.20</maven.surefire.version>
         <maven.compiler.version>3.6.0</maven.compiler.version>
     </properties>
 

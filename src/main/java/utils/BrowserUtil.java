@@ -5,6 +5,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +14,24 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import static java.lang.System.setProperty;
 
 @Component
 public class BrowserUtil {
-    @Autowired
-    private Environment environment;
 
     public WebDriver startFirefox() {
-        setProperty("webdriver.gecko.driver", "src/test/resources/browsers/geckodriver.exe");
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        if (SystemUtils.IS_OS_WINDOWS) {
+            setProperty("webdriver.gecko.driver", "src/test/resources/browserBinaries/geckodriver.exe");
+        }
+        if (SystemUtils.IS_OS_LINUX) {
+            setProperty("webdriver.gecko.driver", "src/test/resources/browserBinaries/geckodriver_linux");
+        }
+        if (SystemUtils.IS_OS_MAC) {
+            setProperty("webdriver.gecko.driver", "src/test/resources/browserBinaries/geckodriver_mac");
+        }
+        FirefoxOptions capabilities = new FirefoxOptions();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver();
         maximize(driver);
@@ -32,10 +41,13 @@ public class BrowserUtil {
 
     public WebDriver startChrome() {
         if (SystemUtils.IS_OS_WINDOWS) {
-            setProperty("webdriver.chrome.driver", "src/test/resources/browsers/chromedriver.exe");
+            setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver.exe");
         }
         if (SystemUtils.IS_OS_LINUX) {
-            setProperty("webdriver.chrome.driver", "src/test/resources/browsers/chromedriver");
+            setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver_linux");
+        }
+        if (SystemUtils.IS_OS_MAC) {
+            setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver_mac");
         }
         WebDriver driver = new ChromeDriver();
         maximize(driver);
@@ -44,15 +56,12 @@ public class BrowserUtil {
     }
 
     public WebDriver startInternetExplorer() {
-        setProperty("webdriver.ie.driver", "src/test/resources/browsers/IEDriverServer.exe");
-        WebDriver driver = new InternetExplorerDriver();
-        maximize(driver);
-        System.out.println("\n----------- INTERNET EXPLORER has started! --------------\n");
-        return driver;
+       //TODO!!!
+        return null;
     }
 
     public WebDriver startBrowser() {
-        switch (environment.getProperty("browser").toLowerCase()) {
+        switch (System.getProperty("browser").toLowerCase()) {
             case "chrome":
                 return startChrome();
             case "firefox":
@@ -67,7 +76,15 @@ public class BrowserUtil {
     }
 
     public WebDriver startBrowserCustomSize(int width, int height) {
-        setProperty("webdriver.chrome.driver", "src/test/resources/browsers/chromedriver.exe");
+        if (SystemUtils.IS_OS_WINDOWS) {
+            setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver.exe");
+        }
+        if (SystemUtils.IS_OS_LINUX) {
+            setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver_linux");
+        }
+        if (SystemUtils.IS_OS_MAC) {
+            setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver_mac");
+        }
         WebDriver driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(width, height));
         System.out.println("\n--------------- CHROME has started in CUSTOM size! ------------------\n");
