@@ -7,7 +7,7 @@
 <script>
 var app = angular.module("myShoppingList", []);
 app.controller("myCtrl", function($scope) {
-    $scope.products = ["Latte machiato", " ", "Caramel kjsdjksfdjhk", "xx"];
+    $scope.products = ["Latte machiato", "Capuccino"];
     $scope.addItem = function () {
         $scope.errortext = "";
         if (!$scope.addMe) {return;}
@@ -26,8 +26,8 @@ app.controller("myCtrl", function($scope) {
 </script>
 
 <div ng-app="myShoppingList" ng-cloak ng-controller="myCtrl" class="w3-card-2 w3-margin" style="max-width:400px;">
-    <header class="headerLine w3-container w3-pale-red w3-padding-16">
-        <h3>QA</h3>
+    <header class="headerLine w3-container w3-sand w3-padding-16">
+        <h3>STAGING</h3>
     </header>
     <ul class="w3-ul">
         <li ng-repeat="x in products" class="w3-padding-16">{{x}}<span ng-click="removeItem($index)"
@@ -40,7 +40,7 @@ app.controller("myCtrl", function($scope) {
                 <input placeholder="Add items here" ng-model="addMe" class="w3-input w3-border w3-padding">
             </div>
             <div class="w3-col s2">
-                <button ng-click="addItem()" class="w3-btn w3-padding w3-pale-red">Add</button>
+                <button ng-click="addItem()" class="w3-btn w3-padding w3-sand">Add</button>
             </div>
         </div>
         <p class="w3-text-red">{{errortext}}</p>

@@ -22,7 +22,7 @@ public class FirstTestWithSelenium extends AbstractTestNGSpringContextTests{
         WebDriver driver = browserUtil.startBrowser();
         driver.get("http://www.google.com");
         driver.get(new File(homepageUrl).getAbsolutePath());
-        TimeUnit.SECONDS.sleep(15);
+        TimeUnit.SECONDS.sleep(5);
         browserUtil.quit(driver);
     }
 }
