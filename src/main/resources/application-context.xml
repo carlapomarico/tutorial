@@ -7,6 +7,6 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="utils.*"/>
-    <context:property-placeholder location="classpath:propertyFiles/${env}.properties"/>
+    <context:property-placeholder location="classpath:environments/${environment}.properties"/>
 
 </beans>
