@@ -18,7 +18,6 @@ import java.util.logging.Level;
 
 import static java.lang.System.setProperty;
 
-@Component
 public class BrowserUtil {
 
     public WebDriver startFirefox() {
