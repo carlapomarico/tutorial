@@ -5,16 +5,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 import static java.lang.System.setProperty;
 
@@ -55,7 +49,7 @@ public class BrowserUtil {
     }
 
     public WebDriver startInternetExplorer() {
-       //TODO!!!
+        //TODO!!!
         return null;
     }
 

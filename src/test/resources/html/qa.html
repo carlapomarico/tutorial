@@ -10,18 +10,22 @@ app.controller("myCtrl", function($scope) {
     $scope.products = ["Latte machiato", " ", "Caramel kjsdjksfdjhk", "xx"];
     $scope.addItem = function () {
         $scope.errortext = "";
+        $scope.successtext = "";
         if (!$scope.addMe) {return;}
         if ($scope.products.indexOf($scope.addMe) == -1) {
             $scope.products.push($scope.addMe);
+            $scope.successtext = "Success!";
         } else {
             $scope.errortext = "The item is already in your list.";
         }
     }
     $scope.removeItem = function (x) {
         $scope.errortext = "";
+        $scope.successtext = "";
         $scope.products.splice(x, 1);
     }
 });
+
 
 </script>
 
@@ -43,6 +47,7 @@ app.controller("myCtrl", function($scope) {
                 <button ng-click="addItem()" class="w3-btn w3-padding w3-pale-red">Add</button>
             </div>
         </div>
+        <p class="successMessage w3-text-green">{{successtext}}</p>
         <p class="w3-text-red">{{errortext}}</p>
     </div>
 </div>
